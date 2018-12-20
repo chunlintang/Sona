@@ -1,0 +1,26 @@
+/*
+ * Copyright (c) 2018. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
+ * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
+ * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
+ * Vestibulum commodo. Ut rhoncus gravida arcu.
+ */
+
+.tab
+  display: flex
+  height: 44px
+  line-height: 44px
+  font-size: $font-size-medium
+
+  .tab-item
+    flex: 1
+    text-align: center
+
+    .tab-link
+      padding-bottom: 5px
+      color: $color-text-l
+
+    &.router-link-active
+      .tab-link
+        color: $color-theme
+        border-bottom: 2px solid $color-theme
