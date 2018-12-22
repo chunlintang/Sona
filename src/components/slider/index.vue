@@ -116,6 +116,12 @@
           this.slider.goToPage(pageIndex, 0, 400)
         }, this.interval)
       }
+    },
+    /**
+     * 释放内存
+     * */
+    destroyed () {
+      clearTimeout(this.timer)
     }
   }
 </script>
