@@ -19,7 +19,7 @@
 
 <script type="text/ecmascript-6">
   import {addClass} from '../../assets/js/dom'
-  import BetterScroll from 'better-scroll'
+  import BScroll from 'better-scroll'
 
   export default {
     name: 'slider',
@@ -80,7 +80,7 @@
         this.$refs.sliderGroup.style.width = width + 'px'
       },
       _initSlider () {
-        this.slider = new BetterScroll(this.$refs.slider, {
+        this.slider = new BScroll(this.$refs.slider, {
           scrollX: true,
           scrollY: false,
           momentum: false,

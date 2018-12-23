@@ -1,11 +1,3 @@
-<!--
-  - Copyright (c) 2018. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-  - Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
-  - Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
-  - Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
-  - Vestibulum commodo. Ut rhoncus gravida arcu.
-  -->
-
 <template>
   <div ref="wrapper">
     <slot></slot>
@@ -13,7 +5,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import BetterScroll from 'better-scroll'
+  import BScroll from 'better-scroll'
 
   export default {
     props: {
@@ -28,6 +20,10 @@
       data: {
         type: Array,
         default: null
+      },
+      refreshDelay: {
+        type: Number,
+        default: 20
       }
     },
     mounted () {
@@ -37,10 +33,10 @@
     },
     methods: {
       _initScroll () {
-        if (this.$refs.wrapper) {
+        if (!this.$refs.wrapper) {
           return
         }
-        this.scroll = new BetterScroll(this.$refs.wrapper, {
+        this.scroll = new BScroll(this.$refs.wrapper, {
           probeType: this.probeType,
           click: this.click
         })
@@ -59,7 +55,7 @@
       data () {
         setTimeout(() => {
           this.refresh()
-        }, 20)
+        }, this.refreshDelay)
       }
     }
   }

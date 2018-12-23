@@ -8,13 +8,13 @@
 
 <template>
   <div class="recommend" ref="recommend">
-    <scroll ref="scroll" class="recommend-content" :data="lists">
+    <scroll ref="scroll" class="recommend-content" :data="dissLists">
       <div>
         <div v-if="recommends.length" class="slider-wrapper" ref="sliderWrapper">
           <slider>
             <div v-for="item in recommends" :key="item.id">
               <a :href="item.linkUrl">
-                <img :src="item.picUrl"/>
+                <img @load="loadImage" alt="imgPic" :src="item.picUrl"/>
               </a>
             </div>
           </slider>
@@ -22,9 +22,9 @@
         <div class="recommend-list">
           <h1 class="list-title">热门歌单</h1>
           <ul>
-            <li v-for="item in lists" class="item" :key="item.dissid">
+            <li v-for="item in dissLists" class="item" :key="item.dissid">
               <div class="icon">
-                <img :src="item.imgurl" width="60" height="60"/>
+                <img alt="imgurl" v-lazy="item.imgurl" width="60" height="60"/>
               </div>
               <div class="text">
                 <h2 class="name" v-html="item.creator.name"></h2>
@@ -41,7 +41,7 @@
 
 <script type="text/ecmascript-6">
   import Slider from '../slider/index'
-  import {getData, getDisplayList} from '../../api/recommend'
+  import {getData, getDissList} from '../../api/recommend'
   import {SUCCESS} from '../../api/config'
   import Scroll from '../layout/scroll'
 
@@ -53,12 +53,12 @@
     data () {
       return {
         recommends: [],
-        lists: []
+        dissLists: []
       }
     },
     created () {
       this._getData()
-      this._getDisplayList()
+      this._getDissList()
     },
     methods: {
       _getData () {
@@ -68,12 +68,18 @@
           }
         })
       },
-      _getDisplayList () {
-        getDisplayList().then((res) => {
+      _getDissList () {
+        getDissList().then((res) => {
           if (res.code === SUCCESS) {
-            this.lists = res.data.list
+            this.dissLists = res.data.list
           }
         })
+      },
+      loadImage () {
+        if (!this.checkLoaded) {
+          this.$refs.scroll.refresh()
+          this.checkLoaded = true
+        }
       }
     }
   }

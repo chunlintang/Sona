@@ -21,8 +21,8 @@ export function getData () {
   return jsonp(url, data, options)
 }
 
-export function getDisplayList () {
-  const url = '/api/getDisplayList'
+export function getDissList () {
+  const url = '/api/getDissList'
 
   const data = Object.assign({}, commonParams, {
     platform: 'yqq',

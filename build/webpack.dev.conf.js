@@ -51,7 +51,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       poll: config.dev.poll,
     },
     before (app) {
-      app.get('/api/getDisplayList', function (req, res) {
+      app.get('/api/getDissList', function (req, res) {
         const url = 'https://c.y.qq.com/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg'
 
         axios.get(url, {
