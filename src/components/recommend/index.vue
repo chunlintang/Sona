@@ -14,7 +14,7 @@
           <slider>
             <div v-for="item in recommends" :key="item.id">
               <a :href="item.linkUrl">
-                <img @load="loadImage" alt="imgPic" :src="item.picUrl"/>
+                <img class="needsclick" @load="_loadImage" alt="imgPic" :src="item.picUrl"/>
               </a>
             </div>
           </slider>
@@ -34,6 +34,9 @@
           </ul>
         </div>
       </div>
+      <div class="loading-container" v-show="!dissLists.length">
+        <loading></loading>
+      </div>
     </scroll>
     <router-view></router-view>
   </div>
@@ -44,9 +47,11 @@
   import {getData, getDissList} from '../../api/recommend'
   import {SUCCESS} from '../../api/config'
   import Scroll from '../layout/scroll'
+  import Loading from '../layout/loading'
 
   export default {
     components: {
+      Loading,
       Scroll,
       Slider
     },
@@ -75,7 +80,7 @@
           }
         })
       },
-      loadImage () {
+      _loadImage () {
         if (!this.checkLoaded) {
           this.$refs.scroll.refresh()
           this.checkLoaded = true
